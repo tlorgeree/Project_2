@@ -1,0 +1,25 @@
+Part 1: 25
+----------
+10 - MessageSystem constructor initializes the fields correctly
+10 - findFile() correctly populates people with names from users.txt, and exits on exception
+5 - findPerson() correctly validates a user's name and returns null if no match is found
+
+Part 2: 10
+----------
+10 - run() is filled in correctly (calling findFile() and user validation while loop)
+
+Part 3: 25
+-----------
+10 - updateQueues() correctly updates queueMessages[i] when size is not 0
+10 - updateQueues() correctly alerts the user when a message is finished being processed
+5 - updateQueues() correctly clears and resets the queue after a message is finished being processed
+
+Part 4: 35
+----------
+5 - option 1 correctly uses findQueue() to find the first available queue, and returns out if there is none
+10 - option 1 correctly gets the user's message and validates the recipient's name
+5 - option 1 correctly calls enqueue on the queue to send the message and sender-receiver information
+10 - option 2 correctly prints out the status of all 3 queues
+5 - option 4 correctly exits the program with System.exit()
+
+5 - Does the submission work? (Does it compile and run? Are there any problematic programming choices? etc.)
