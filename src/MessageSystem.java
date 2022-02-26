@@ -3,8 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
-
 public class MessageSystem {
     ArrayList<String> people;
     MessageQueue[] queues;
