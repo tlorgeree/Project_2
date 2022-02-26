@@ -59,7 +59,6 @@ public class MessageSystem {
             while (users.hasNextLine()){
                 String new_user = users.nextLine();
                 people.add(new_user);
-                System.out.println(new_user);
             }
             users.close();
         }catch (FileNotFoundException e) {
@@ -71,31 +70,31 @@ public class MessageSystem {
     public String findPerson() {
         //TODO: ask the user for their name and store it as a String variable
         System.out.println("What is your username?");
-        user = keyboard.nextLine();
+        String username = keyboard.nextLine();
         boolean menu = true;
         while(menu) {
-            System.out.println(user + " is your username? (Y/N)");
+            System.out.println(username + " is your username? (Y/N)");
             String response = keyboard.nextLine();
             switch(response) {
                 case "N":
                     System.out.println("What is your username?");
-                    user = keyboard.nextLine();
+                    username = keyboard.nextLine();
                     break;
                 case "Y":
-                    if(people.contains(user)) {
+                    if(people.contains(username)) {
                         System.out.println("User authenticated.");
                         menu = false;
                     }
                     else{
-                        System.out.println("User not found, try again.");
-                        System.out.println("What is your username?");
-                        user = keyboard.nextLine();
+                        System.out.println("Username not found. Try again.");
+                        return null;
                     }
                     break;
                 default:
                     System.out.println("Invalid Response.");
             }
         }
+        user = username;
         return user;
         //Then, loop through people and try to find a match
         //If there's a match, return that name. If not, return null.
@@ -137,6 +136,8 @@ public class MessageSystem {
             case 4 -> {
                 //TODO: fill this in with the "exit" option
                 //I suggest printing to the screen and then using System.exit().
+                System.out.println("Terminating program.");
+                System.exit(1);
 
             }
             default -> System.out.println("Please enter a valid choice (1-4).");
@@ -161,12 +162,21 @@ public class MessageSystem {
 
         //This for loop allows you to refer to each of the 3 queues using i. For example, queues[0] gives the first queue.
         for (int i = 0; i < queues.length; ++i) {
+            queueMessages[i] = "";
             if (queues[i].size != 0) {
+                MessageFragment next = queues[i].poll();
+                queueMessages[i] += next;
                 //This code happens when the queue is processing a message still
 
             } else if (queues[i].size == 0 && queues[i].inUse) {
                 //This code happens when the queue is finished processing a message, but hasn't been marked as available yet
-
+                System.out.println(String.format("""
+                ***************ALERT**************
+                Message Sent!
+                %s
+                %s
+                *            4 - Exit            *
+                ***************ALERT**************""",queues[i].sendReceive,queueMessages[i]));
             }
         }
     }

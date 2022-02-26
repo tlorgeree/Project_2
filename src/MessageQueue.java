@@ -3,7 +3,7 @@ public class MessageQueue {
     int size = 0;
     MessageFragment head = null;
     MessageFragment tail = null;
-    String sendReceive;//names od sender and recipient
+    String sendReceive;//names of sender and recipient
 
     public void clear(){
         size = 0;
