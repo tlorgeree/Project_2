@@ -25,10 +25,27 @@ public class MessageSystem {
 
     public void run() {
         //TODO: This is where the main program logic begins
-
         //begin by calling findFile()
-
+        findFile();
         //next, set up the while loop that validates the user's name
+        System.out.println("What is your username?");
+        user = keyboard.nextLine();
+        boolean menu = true;
+        while(menu) {
+            System.out.println(user + " is your username? (Y/N)");
+            String response = keyboard.nextLine();
+            switch(response) {
+                case "N":
+                    System.out.println("What is your username?");
+                    user = keyboard.nextLine();
+                    break;
+                case "Y":
+                    menu = false;
+                    break;
+                default:
+                    System.out.println("Invalid Response.");
+            }
+        }
 
 
         //I've given you this bit of code: this runs an infinite loop that repeatedly calls updateQueues (next step)
@@ -56,11 +73,7 @@ public class MessageSystem {
             Scanner users = new Scanner(new File("users.txt"));
             while (users.hasNextLine()){
                 String new_user = users.nextLine();
-                try {
-                    people.add(new_user);
-                }catch(Exception f){
-                    System.out.println("There is an invalid Doctor Entry");
-                }
+                people.add(new_user);
             }
             users.close();
         }catch (FileNotFoundException e) {
