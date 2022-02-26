@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
 
 public class MessageSystem {
     ArrayList<String> people;
@@ -10,6 +14,12 @@ public class MessageSystem {
 
     public MessageSystem() {
         //TODO: fill this constructor in by initializing values for the 5 fields above
+        people = new ArrayList<String>();
+        queues = new MessageQueue[]{new MessageQueue(), new MessageQueue(), new MessageQueue()};
+        queueMessages = new String[]{"","",""};
+        keyboard = new Scanner(System.in);
+        user = null;
+
 
     }
 
@@ -41,8 +51,22 @@ public class MessageSystem {
 
     public void findFile() {
         //TODO: fill this in with a try-catch that opens users.txt
-        //if you find it, loop through each line and add them to people
 
+        try{
+            Scanner users = new Scanner(new File("users.txt"));
+            while (users.hasNextLine()){
+                String new_user = users.nextLine();
+                try {
+                    people.add(new_user);
+                }catch(Exception f){
+                    System.out.println("There is an invalid Doctor Entry");
+                }
+            }
+            users.close();
+        }catch (FileNotFoundException e) {
+            System.out.println("users.txt not Found. Terminating program.");
+            System.exit(0);
+        }
     }
 
     public String findPerson() {
