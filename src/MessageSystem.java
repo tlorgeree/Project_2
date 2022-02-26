@@ -28,25 +28,10 @@ public class MessageSystem {
         //begin by calling findFile()
         findFile();
         //next, set up the while loop that validates the user's name
-        System.out.println("What is your username?");
-        user = keyboard.nextLine();
-        boolean menu = true;
-        while(menu) {
-            System.out.println(user + " is your username? (Y/N)");
-            String response = keyboard.nextLine();
-            switch(response) {
-                case "N":
-                    System.out.println("What is your username?");
-                    user = keyboard.nextLine();
-                    break;
-                case "Y":
-                    menu = false;
-                    break;
-                default:
-                    System.out.println("Invalid Response.");
-            }
-        }
 
+        while(user == null){
+            findPerson();
+        }
 
         //I've given you this bit of code: this runs an infinite loop that repeatedly calls updateQueues (next step)
         //  and then asks for user input.
@@ -74,6 +59,7 @@ public class MessageSystem {
             while (users.hasNextLine()){
                 String new_user = users.nextLine();
                 people.add(new_user);
+                System.out.println(new_user);
             }
             users.close();
         }catch (FileNotFoundException e) {
@@ -84,11 +70,37 @@ public class MessageSystem {
 
     public String findPerson() {
         //TODO: ask the user for their name and store it as a String variable
+        System.out.println("What is your username?");
+        user = keyboard.nextLine();
+        boolean menu = true;
+        while(menu) {
+            System.out.println(user + " is your username? (Y/N)");
+            String response = keyboard.nextLine();
+            switch(response) {
+                case "N":
+                    System.out.println("What is your username?");
+                    user = keyboard.nextLine();
+                    break;
+                case "Y":
+                    if(people.contains(user)) {
+                        System.out.println("User authenticated.");
+                        menu = false;
+                    }
+                    else{
+                        System.out.println("User not found, try again.");
+                        System.out.println("What is your username?");
+                        user = keyboard.nextLine();
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid Response.");
+            }
+        }
+        return user;
         //Then, loop through people and try to find a match
         //If there's a match, return that name. If not, return null.
 
         //(code won't compile without a return here, you'll want to change where this return null is later)
-        return null;
     }
 
     public void menuInput() {
