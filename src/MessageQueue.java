@@ -9,6 +9,7 @@ public class MessageQueue {
         size = 0;
         head = null;
         tail = null;
+        inUse = false;
     }
 
     public String getStatus(int num){
